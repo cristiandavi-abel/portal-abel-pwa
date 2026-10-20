@@ -85,13 +85,60 @@
       return id || "inicio";
     };
 
-    const activateView = (id) => {
-      const targetView = views.find((v) => v.dataset.view === id || v.id === id);
-      if (targetView) {
-        views.forEach((v) => v.classList.toggle("is-active", v === targetView));
-      } else {
-        views.forEach((v, i) => v.classList.toggle("is-active", i === 0));
+    let currentViewId = getViewIdFromHash(window.location.hash);
+    let isTransitioning = false;
+
+    const activateView = (id, direction = "forward") => {
+      if (isTransitioning) return;
+      const targetView = views.find((v) => v.dataset.view === id || v.id === id) || views[0];
+      const currentView = views.find((v) => v.classList.contains("is-active")) || targetView;
+
+      if (targetView === currentView || !targetView) {
+        currentViewId = id;
+        [...desktopLinks, ...bottomLinks].forEach((link) => {
+          const href = link.getAttribute("href") || "";
+          const isActive = href === `#${id}`;
+          link.classList.toggle("is-active", isActive);
+          if (isActive) {
+            link.setAttribute("aria-current", "page");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+        return;
       }
+
+      const isStandalone = document.documentElement.classList.contains("app-standalone");
+
+      if (isStandalone && window.innerWidth <= 760) {
+        isTransitioning = true;
+        const dir = direction === "backward" ? "backward" : "forward";
+
+        currentView.classList.add("is-leaving");
+        currentView.classList.remove("is-active");
+        currentView.dataset.leaveDir = dir;
+
+        targetView.classList.remove("is-leaving");
+        targetView.dataset.enterDir = dir;
+        targetView.classList.add("is-entering");
+
+        void targetView.offsetWidth;
+
+        targetView.classList.add("is-active");
+        targetView.classList.remove("is-entering");
+
+        setTimeout(() => {
+          currentView.classList.remove("is-leaving");
+          targetView.classList.remove("is-entering");
+          delete currentView.dataset.leaveDir;
+          delete targetView.dataset.enterDir;
+          isTransitioning = false;
+        }, 220);
+      } else {
+        views.forEach((v) => v.classList.toggle("is-active", v === targetView));
+      }
+
+      currentViewId = id;
 
       [...desktopLinks, ...bottomLinks].forEach((link) => {
         const href = link.getAttribute("href") || "";
@@ -104,10 +151,12 @@
         }
       });
 
-      if (window.innerWidth <= 760) {
+      if (!isStandalone && window.innerWidth <= 760) {
         window.scrollTo({ top: 0, behavior: "auto" });
       }
     };
+
+    const viewOrder = views.map((v) => v.dataset.view || v.id);
 
     links.forEach((link) => {
       link.addEventListener("click", (event) => {
@@ -115,22 +164,34 @@
         if (!href || !href.startsWith("#")) return;
         const id = href.replace("#", "") || "inicio";
         event.preventDefault();
-        activateView(id);
+
+        const currentIndex = viewOrder.indexOf(currentViewId);
+        const nextIndex = viewOrder.indexOf(id);
+        const direction = nextIndex >= currentIndex ? "forward" : "backward";
+
+        activateView(id, direction);
         history.replaceState(null, "", href);
       });
     });
 
     window.addEventListener("hashchange", () => {
-      activateView(getViewIdFromHash(window.location.hash));
+      const id = getViewIdFromHash(window.location.hash);
+      const currentIndex = viewOrder.indexOf(currentViewId);
+      const nextIndex = viewOrder.indexOf(id);
+      const direction = nextIndex >= currentIndex ? "forward" : "backward";
+      activateView(id, direction);
     });
 
-    activateView(getViewIdFromHash(window.location.hash));
+    activateView(currentViewId);
 
     let lastWidth = window.innerWidth;
     window.addEventListener("resize", () => {
       const w = window.innerWidth;
       if (w > 760 && lastWidth <= 760) {
-        views.forEach((v) => v.classList.add("is-active"));
+        views.forEach((v) => {
+          v.classList.remove("is-leaving", "is-entering");
+          v.classList.add("is-active");
+        });
       }
       lastWidth = w;
     });
@@ -319,7 +380,19 @@
   /* ----------------------------------------------------------
      Inicialização
      ---------------------------------------------------------- */
+  function initAppMode() {
+    const isStandaloneMode =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.navigator.standalone === true;
+
+    if (isStandaloneMode) {
+      document.documentElement.classList.add("app-standalone");
+      document.body.classList.add("app-standalone");
+    }
+  }
+
   function init() {
+    initAppMode();
     initMenuMobile();
     initNavegacaoSecoes();
     initFiltroAvisos();

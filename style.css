@@ -971,6 +971,129 @@ button { font: inherit; }
   }
 }
 
+/* Modo app instalado (standalone) - sem rolagem global, telas entram/saem */
+html.app-standalone,
+body.app-standalone {
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body.app-standalone {
+  padding-bottom: 0;
+}
+
+body.app-standalone .site-footer {
+  display: none;
+}
+
+body.app-standalone .to-top {
+  bottom: calc(var(--bottom-nav-h) + 0.6rem + var(--bottom-nav-pad));
+}
+
+@media (max-width: 760px) {
+  body.app-standalone .views {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    bottom: calc(var(--bottom-nav-h) + var(--bottom-nav-pad));
+    overflow: hidden;
+  }
+
+  body.app-standalone .view {
+    position: absolute;
+    inset: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding: clamp(0.6rem, 0.4rem + 1vw, 0.9rem) clamp(0.9rem, 0.8rem + 1vw, 1.2rem)
+      calc(clamp(0.6rem, 0.4rem + 1vw, 0.9rem) + 0.25rem);
+    background: var(--fundo);
+    transform: translateX(0);
+    opacity: 1;
+    transition: none;
+  }
+
+  body.app-standalone .view.section-alt {
+    background: linear-gradient(180deg, var(--azul-suave) 0%, #f2f8ff 100%);
+  }
+
+  body.app-standalone .view.is-active {
+    display: block;
+    z-index: 2;
+  }
+
+  body.app-standalone .view.is-entering {
+    display: block;
+    z-index: 3;
+    animation: appViewEnter 200ms ease both;
+  }
+
+  body.app-standalone .view.is-leaving {
+    display: block;
+    z-index: 1;
+    animation: appViewLeave 200ms ease both;
+  }
+
+  body.app-standalone .view[data-enter-dir="backward"].is-entering {
+    animation-name: appViewEnterBackward;
+  }
+
+  body.app-standalone .view[data-leave-dir="backward"].is-leaving {
+    animation-name: appViewLeaveBackward;
+  }
+
+  @keyframes appViewEnter {
+    from {
+      transform: translateX(16%);
+      opacity: 0.9;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes appViewLeave {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-12%);
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes appViewEnterBackward {
+    from {
+      transform: translateX(-16%);
+      opacity: 0.9;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes appViewLeaveBackward {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(16%);
+      opacity: 0.9;
+    }
+  }
+}
+
 @media (min-width: 761px) {
   .main-nav { display: block; }
   .bottom-nav { display: none !important; }
@@ -981,6 +1104,43 @@ button { font: inherit; }
     opacity: 1 !important;
     transform: none !important;
     min-height: auto;
+  }
+
+  html.app-standalone,
+  body.app-standalone {
+    height: auto;
+    overflow: visible;
+  }
+
+  body.app-standalone {
+    padding-bottom: 0;
+  }
+
+  body.app-standalone .site-footer {
+    display: block;
+  }
+
+  body.app-standalone .views {
+    position: static;
+    top: auto;
+    bottom: auto;
+    overflow: visible;
+  }
+
+  body.app-standalone .view {
+    position: static;
+    height: auto;
+    overflow: visible;
+    animation: none !important;
+    padding: clamp(2.25rem, 1.25rem + 4vw, 4.75rem) 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.app-standalone .view.is-entering,
+  body.app-standalone .view.is-leaving {
+    animation: none !important;
+    transition: none !important;
   }
 }
 
