@@ -2,9 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content="Portal Escolar Abel - informações, cursos, avisos, calendário e contato da Escola Estadual Professor Abel Freire Coelho. Projeto demonstrativo (PWA)." />
   <meta name="theme-color" content="#0d2b45" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <title>Portal Escolar Abel | Escola Estadual Professor Abel Freire Coelho</title>
 
   <!-- PWA -->
@@ -23,7 +24,7 @@
   <header class="site-header" id="topo">
     <div class="container header-inner">
       <a class="brand" href="#inicio" aria-label="Portal Escolar Abel - ir para o início">
-        <img class="brand-logo" src="icons/icon.svg" alt="" width="44" height="44" aria-hidden="true" />
+        <img class="brand-logo" src="icons/icon.svg" alt="" width="40" height="40" aria-hidden="true" />
         <span class="brand-text">
           <strong>Portal Escolar Abel</strong>
           <small>E. E. Professor Abel Freire Coelho</small>
@@ -484,6 +485,51 @@
       <p class="footer-copy">&copy; <span id="anoAtual"></span> Portal Escolar Abel — projeto educativo.</p>
     </div>
   </footer>
+
+  <nav class="bottom-nav" id="bottomNav" aria-label="Navegação inferior">
+    <ul class="bottom-nav-list">
+      <li class="bottom-nav-item">
+        <a class="bottom-nav-link" href="#inicio" aria-label="Início">
+          <svg class="bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z" fill="currentColor"/>
+          </svg>
+          <span class="bottom-nav-label">Início</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a class="bottom-nav-link" href="#cursos" aria-label="Cursos">
+          <svg class="bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h10v2H4v-2z" fill="currentColor"/>
+          </svg>
+          <span class="bottom-nav-label">Cursos</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a class="bottom-nav-link" href="#avisos" aria-label="Avisos">
+          <svg class="bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2zm6-6V11a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2z" fill="currentColor"/>
+          </svg>
+          <span class="bottom-nav-label">Avisos</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a class="bottom-nav-link" href="#calendario" aria-label="Calendário">
+          <svg class="bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM5 4h1V2h2v2h8V2h2v2h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 4v12h14V8H5z" fill="currentColor"/>
+          </svg>
+          <span class="bottom-nav-label">Calendário</span>
+        </a>
+      </li>
+      <li class="bottom-nav-item">
+        <a class="bottom-nav-link" href="#contato" aria-label="Contato">
+          <svg class="bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M21 8V7l-3 2-3-2v1l3 2 3-2zm-2 13a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14zM5 7l3 2-3 2V7z" fill="currentColor"/>
+          </svg>
+          <span class="bottom-nav-label">Contato</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 
   <button class="to-top" id="toTop" type="button" aria-label="Voltar ao topo" hidden>↑</button>
 

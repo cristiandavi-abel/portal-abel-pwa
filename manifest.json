@@ -7,6 +7,7 @@
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
+  "display_override": ["standalone", "window-controls-overlay", "fullscreen"],
   "orientation": "portrait-primary",
   "background_color": "#f5f9fd",
   "theme_color": "#0d2b45",

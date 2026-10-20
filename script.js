@@ -42,6 +42,11 @@
       link.addEventListener("click", closeMenu);
     });
 
+    // Fecha ao clicar em links da navegação inferior
+    document.querySelectorAll(".bottom-nav-link").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
     // Fecha com a tecla Escape
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") closeMenu();
@@ -68,7 +73,9 @@
      2. Navegação: link ativo + rolagem suave entre as seções
      ---------------------------------------------------------- */
   function initNavegacaoSecoes() {
-    const links = Array.from(document.querySelectorAll(".nav-link[href^='#']"));
+    const desktopLinks = Array.from(document.querySelectorAll(".nav-link[href^='#']"));
+    const bottomLinks = Array.from(document.querySelectorAll(".bottom-nav-link[href^='#']"));
+    const links = [...desktopLinks, ...bottomLinks];
     if (!links.length) return;
 
     // Rola até a seção respeitando a altura do cabeçalho fixo
@@ -81,7 +88,7 @@
         event.preventDefault();
         const header = document.querySelector(".site-header");
         const offset = header ? header.offsetHeight : 0;
-        const top = target.getBoundingClientRect().top + window.pageYOffset - offset - 8;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset - 10;
 
         window.scrollTo({ top, behavior: "smooth" });
         history.replaceState(null, "", id);
@@ -89,16 +96,20 @@
     });
 
     // Destaca o link da seção visível
-    const sections = links
-      .map((link) => document.querySelector(link.getAttribute("href")))
-      .filter(Boolean);
+    const sections = Array.from(
+      new Set(
+        links
+          .map((link) => document.querySelector(link.getAttribute("href")))
+          .filter(Boolean)
+      )
+    );
 
     const setActive = (id) => {
-      links.forEach((link) => {
+      [...desktopLinks, ...bottomLinks].forEach((link) => {
         const isActive = link.getAttribute("href") === `#${id}`;
         link.classList.toggle("is-active", isActive);
         if (isActive) {
-          link.setAttribute("aria-current", "true");
+          link.setAttribute("aria-current", "page");
         } else {
           link.removeAttribute("aria-current");
         }
@@ -113,7 +124,7 @@
             .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
           if (visible) setActive(visible.target.id);
         },
-        { rootMargin: "-45% 0px -50% 0px", threshold: [0, 0.25, 0.5, 1] }
+        { rootMargin: "-40% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] }
       );
       sections.forEach((section) => observer.observe(section));
     }
