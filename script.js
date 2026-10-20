@@ -76,37 +76,26 @@
     const desktopLinks = Array.from(document.querySelectorAll(".nav-link[href^='#']"));
     const bottomLinks = Array.from(document.querySelectorAll(".bottom-nav-link[href^='#']"));
     const links = [...desktopLinks, ...bottomLinks];
+    const views = Array.from(document.querySelectorAll(".view[data-view]"));
     if (!links.length) return;
 
-    // Rola até a seção respeitando a altura do cabeçalho fixo
-    links.forEach((link) => {
-      link.addEventListener("click", (event) => {
-        const id = link.getAttribute("href");
-        const target = document.querySelector(id);
-        if (!target) return;
+    const getViewIdFromHash = (hash) => {
+      if (!hash) return "inicio";
+      const id = hash.replace("#", "");
+      return id || "inicio";
+    };
 
-        event.preventDefault();
-        const header = document.querySelector(".site-header");
-        const offset = header ? header.offsetHeight : 0;
-        const top = target.getBoundingClientRect().top + window.pageYOffset - offset - 10;
+    const activateView = (id) => {
+      const targetView = views.find((v) => v.dataset.view === id || v.id === id);
+      if (targetView) {
+        views.forEach((v) => v.classList.toggle("is-active", v === targetView));
+      } else {
+        views.forEach((v, i) => v.classList.toggle("is-active", i === 0));
+      }
 
-        window.scrollTo({ top, behavior: "smooth" });
-        history.replaceState(null, "", id);
-      });
-    });
-
-    // Destaca o link da seção visível
-    const sections = Array.from(
-      new Set(
-        links
-          .map((link) => document.querySelector(link.getAttribute("href")))
-          .filter(Boolean)
-      )
-    );
-
-    const setActive = (id) => {
       [...desktopLinks, ...bottomLinks].forEach((link) => {
-        const isActive = link.getAttribute("href") === `#${id}`;
+        const href = link.getAttribute("href") || "";
+        const isActive = href === `#${id}`;
         link.classList.toggle("is-active", isActive);
         if (isActive) {
           link.setAttribute("aria-current", "page");
@@ -114,20 +103,37 @@
           link.removeAttribute("aria-current");
         }
       });
+
+      if (window.innerWidth <= 760) {
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
     };
 
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const visible = entries
-            .filter((entry) => entry.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-          if (visible) setActive(visible.target.id);
-        },
-        { rootMargin: "-40% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] }
-      );
-      sections.forEach((section) => observer.observe(section));
-    }
+    links.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const href = link.getAttribute("href");
+        if (!href || !href.startsWith("#")) return;
+        const id = href.replace("#", "") || "inicio";
+        event.preventDefault();
+        activateView(id);
+        history.replaceState(null, "", href);
+      });
+    });
+
+    window.addEventListener("hashchange", () => {
+      activateView(getViewIdFromHash(window.location.hash));
+    });
+
+    activateView(getViewIdFromHash(window.location.hash));
+
+    let lastWidth = window.innerWidth;
+    window.addEventListener("resize", () => {
+      const w = window.innerWidth;
+      if (w > 760 && lastWidth <= 760) {
+        views.forEach((v) => v.classList.add("is-active"));
+      }
+      lastWidth = w;
+    });
   }
 
   /* ----------------------------------------------------------

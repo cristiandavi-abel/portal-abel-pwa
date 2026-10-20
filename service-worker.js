@@ -7,7 +7,7 @@
    Caminhos relativos (./) para funcionar no GitHub Pages em subpasta.
    ============================================================ */
 
-const CACHE_VERSION = "portal-abel-v1";
+const CACHE_VERSION = "portal-abel-v2";
 const PRECACHE_URLS = [
   "./",
   "./index.html",

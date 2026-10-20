@@ -936,11 +936,52 @@ button { font: inherit; }
   .filter-btn { flex: 1 1 auto; min-height: 44px; }
 }
 
+.views {
+  display: block;
+}
+
+.view {
+  display: block;
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  .views {
+    position: relative;
+  }
+
+  .view {
+    display: none;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 160ms ease, transform 160ms ease;
+    min-height: calc(100dvh - var(--header-h) - var(--bottom-nav-h) - var(--bottom-nav-pad));
+    padding-top: clamp(0.5rem, 0.25rem + 1vw, 0.75rem);
+    padding-bottom: clamp(0.25rem, 0.1rem + 1vw, 0.5rem);
+  }
+
+  .view.is-active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  html {
+    scroll-padding-top: calc(var(--header-h) + 8px);
+  }
+}
+
 @media (min-width: 761px) {
   .main-nav { display: block; }
   .bottom-nav { display: none !important; }
   .site-footer { padding-bottom: 1.5rem; }
   body { padding-bottom: 0; }
+  .view {
+    display: block !important;
+    opacity: 1 !important;
+    transform: none !important;
+    min-height: auto;
+  }
 }
 
 /* ---------- Navegação inferior (mobile-first) ---------- */

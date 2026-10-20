@@ -11,6 +11,7 @@
   "orientation": "portrait-primary",
   "background_color": "#f5f9fd",
   "theme_color": "#0d2b45",
+  "version": "1.1.0",
   "categories": ["education", "productivity"],
   "icons": [
     {
