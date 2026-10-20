@@ -936,176 +936,110 @@ button { font: inherit; }
   .filter-btn { flex: 1 1 auto; min-height: 44px; }
 }
 
-.views {
-  display: block;
-}
-
-.view {
-  display: block;
-  width: 100%;
-}
-
-@media (max-width: 760px) {
-  .views {
-    position: relative;
-  }
-
-  .view {
-    display: none;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity 160ms ease, transform 160ms ease;
-    min-height: calc(100dvh - var(--header-h) - var(--bottom-nav-h) - var(--bottom-nav-pad));
-    padding-top: clamp(0.5rem, 0.25rem + 1vw, 0.75rem);
-    padding-bottom: clamp(0.25rem, 0.1rem + 1vw, 0.5rem);
-  }
-
-  .view.is-active {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  html {
-    scroll-padding-top: calc(var(--header-h) + 8px);
-  }
-}
-
-/* Modo app instalado (standalone) - sem rolagem global, telas entram/saem */
+/* Modo app instalado (standalone) - tela única por botão, sem rolagem global */
 html.app-standalone,
 body.app-standalone {
   height: 100dvh;
   overflow: hidden;
   overscroll-behavior: none;
+  touch-action: pan-y;
 }
 
 body.app-standalone {
   padding-bottom: 0;
 }
 
-body.app-standalone .site-footer {
+body.app-standalone .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+body.app-standalone main {
+  padding-top: var(--header-h);
+}
+
+body.app-standalone .app-screens {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  bottom: calc(var(--bottom-nav-h) + var(--bottom-nav-pad));
+  overflow: hidden;
+}
+
+body.app-standalone .app-screen {
+  position: absolute;
+  inset: 0;
   display: none;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  background: var(--fundo);
 }
 
-body.app-standalone .to-top {
-  bottom: calc(var(--bottom-nav-h) + 0.6rem + var(--bottom-nav-pad));
+body.app-standalone .app-screen.is-active {
+  display: block;
+  z-index: 2;
+  animation: screenIn 180ms ease;
 }
 
-@media (max-width: 760px) {
-  body.app-standalone .views {
-    position: fixed;
-    top: var(--header-h);
-    left: 0;
-    right: 0;
-    bottom: calc(var(--bottom-nav-h) + var(--bottom-nav-pad));
-    overflow: hidden;
+body.app-standalone .app-screen.is-leaving {
+  display: block;
+  z-index: 1;
+  animation: screenOut 180ms ease forwards;
+}
+
+@keyframes screenIn {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
   }
-
-  body.app-standalone .view {
-    position: absolute;
-    inset: 0;
-    display: none;
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-    padding: clamp(0.6rem, 0.4rem + 1vw, 0.9rem) clamp(0.9rem, 0.8rem + 1vw, 1.2rem)
-      calc(clamp(0.6rem, 0.4rem + 1vw, 0.9rem) + 0.25rem);
-    background: var(--fundo);
-    transform: translateX(0);
+  to {
     opacity: 1;
-    transition: none;
+    transform: translateX(0);
   }
+}
 
-  body.app-standalone .view.section-alt {
-    background: linear-gradient(180deg, var(--azul-suave) 0%, #f2f8ff 100%);
+@keyframes screenOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
   }
+  to {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+}
 
-  body.app-standalone .view.is-active {
-    display: block;
-    z-index: 2;
-  }
+body.app-standalone .app-screen > .section,
+body.app-standalone .app-screen > .hero {
+  min-height: 100%;
+}
 
-  body.app-standalone .view.is-entering {
-    display: block;
-    z-index: 3;
-    animation: appViewEnter 200ms ease both;
-  }
+body.app-standalone .site-footer,
+body.app-standalone .to-top {
+  display: none !important;
+}
 
-  body.app-standalone .view.is-leaving {
-    display: block;
-    z-index: 1;
-    animation: appViewLeave 200ms ease both;
-  }
+body.app-standalone .bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 
-  body.app-standalone .view[data-enter-dir="backward"].is-entering {
-    animation-name: appViewEnterBackward;
-  }
-
-  body.app-standalone .view[data-leave-dir="backward"].is-leaving {
-    animation-name: appViewLeaveBackward;
-  }
-
-  @keyframes appViewEnter {
-    from {
-      transform: translateX(16%);
-      opacity: 0.9;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes appViewLeave {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(-12%);
-      opacity: 0.9;
-    }
-  }
-
-  @keyframes appViewEnterBackward {
-    from {
-      transform: translateX(-16%);
-      opacity: 0.9;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes appViewLeaveBackward {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(16%);
-      opacity: 0.9;
-    }
-  }
+body.app-standalone .section,
+body.app-standalone .hero {
+  padding: clamp(1.25rem, 1rem + 2vw, 2rem) 0 calc(clamp(1.25rem, 1rem + 2vw, 2rem) + 0.25rem);
 }
 
 @media (min-width: 761px) {
-  .main-nav { display: block; }
-  .bottom-nav { display: none !important; }
-  .site-footer { padding-bottom: 1.5rem; }
-  body { padding-bottom: 0; }
-  .view {
-    display: block !important;
-    opacity: 1 !important;
-    transform: none !important;
-    min-height: auto;
-  }
-
   html.app-standalone,
   body.app-standalone {
     height: auto;
@@ -1116,31 +1050,53 @@ body.app-standalone .to-top {
     padding-bottom: 0;
   }
 
-  body.app-standalone .site-footer {
-    display: block;
+  body.app-standalone .site-header {
+    position: sticky;
   }
 
-  body.app-standalone .views {
+  body.app-standalone main {
+    padding-top: 0;
+  }
+
+  body.app-standalone .app-screens {
     position: static;
     top: auto;
     bottom: auto;
     overflow: visible;
   }
 
-  body.app-standalone .view {
+  body.app-standalone .app-screen {
     position: static;
+    display: block !important;
     height: auto;
     overflow: visible;
     animation: none !important;
+  }
+
+  body.app-standalone .app-screen > .section,
+  body.app-standalone .app-screen > .hero {
+    min-height: auto;
+  }
+
+  body.app-standalone .site-footer,
+  body.app-standalone .to-top {
+    display: grid !important;
+  }
+
+  body.app-standalone .bottom-nav {
+    display: none !important;
+  }
+
+  body.app-standalone .section,
+  body.app-standalone .hero {
     padding: clamp(2.25rem, 1.25rem + 4vw, 4.75rem) 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body.app-standalone .view.is-entering,
-  body.app-standalone .view.is-leaving {
+  body.app-standalone .app-screen.is-active,
+  body.app-standalone .app-screen.is-leaving {
     animation: none !important;
-    transition: none !important;
   }
 }
 

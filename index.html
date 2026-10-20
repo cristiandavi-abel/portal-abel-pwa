@@ -57,9 +57,12 @@
     <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   </header>
 
-  <main id="conteudo" class="views">
-    <!-- ===================== INÍCIO ===================== -->
-    <section class="hero view is-active" id="inicio" data-view="inicio" aria-labelledby="tituloInicio">
+  <main id="conteudo">
+    <div class="app-screens">
+      <!-- TELA: INÍCIO -->
+      <section class="app-screen is-active" id="tela-inicio" data-screen="inicio">
+        <!-- ===================== INÍCIO ===================== -->
+            <section class="hero" id="inicio" aria-labelledby="tituloInicio">
       <div class="container hero-inner">
         <div class="hero-content">
           <p class="eyebrow">Portal institucional demonstrativo</p>
@@ -92,12 +95,13 @@
             <div><strong>10</strong><span>Eventos</span></div>
           </div>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
 
-    <!-- ===================== SOBRE ===================== -->
-    <section class="section view" id="sobre" data-view="sobre" aria-labelledby="tituloSobre">
-      <div class="container">
+      </section>
+      <!-- ===================== SOBRE ===================== -->
+        <section class="section" id="sobre" aria-labelledby="tituloSobre">
+        <div class="container">
         <header class="section-head">
           <h2 id="tituloSobre">Apresentação institucional</h2>
           <p class="section-sub">
@@ -132,11 +136,16 @@
             </p>
           </article>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
 
-    <!-- ===================== CURSOS ===================== -->
-    <section class="section section-alt view" id="cursos" data-view="cursos" aria-labelledby="tituloCursos">
+      </section>
+      </section>
+
+      <!-- TELA: CURSOS -->
+      <section class="app-screen" id="tela-cursos" data-screen="cursos">
+        <!-- ===================== CURSOS ===================== -->
+            <section class="section section-alt" id="cursos" aria-labelledby="tituloCursos">
       <div class="container">
         <header class="section-head">
           <h2 id="tituloCursos">Cursos e informações escolares</h2>
@@ -220,11 +229,16 @@
             </tbody>
           </table>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
 
-    <!-- ===================== AVISOS ===================== -->
-    <section class="section view" id="avisos" data-view="avisos" aria-labelledby="tituloAvisos">
+        </section>
+      </section>
+
+      <!-- TELA: AVISOS -->
+      <section class="app-screen" id="tela-avisos" data-screen="avisos">
+        <!-- ===================== AVISOS ===================== -->
+            <section class="section" id="avisos" aria-labelledby="tituloAvisos">
       <div class="container">
         <header class="section-head">
           <h2 id="tituloAvisos">Avisos e comunicados da coordenação</h2>
@@ -300,11 +314,16 @@
         </div>
 
         <p class="empty-state" id="avisoVazio" hidden>Nenhum aviso encontrado para esta categoria.</p>
-      </div>
-    </section>
+        </div>
+      </section>
 
-    <!-- ===================== CALENDÁRIO ===================== -->
-    <section class="section section-alt view" id="calendario" data-view="calendario" aria-labelledby="tituloCalendario">
+        </section>
+      </section>
+
+      <!-- TELA: CALENDÁRIO -->
+      <section class="app-screen" id="tela-calendario" data-screen="calendario">
+        <!-- ===================== CALENDÁRIO ===================== -->
+            <section class="section section-alt" id="calendario" aria-labelledby="tituloCalendario">
       <div class="container">
         <header class="section-head">
           <h2 id="tituloCalendario">Calendário escolar demonstrativo</h2>
@@ -380,12 +399,17 @@
             </div>
           </aside>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
 
-    <!-- ===================== CONTATO ===================== -->
-    <section class="section view" id="contato" data-view="contato" aria-labelledby="tituloContato">
-      <div class="container">
+      </section>
+      </section>
+
+      <!-- TELA: CONTATO -->
+      <section class="app-screen" id="tela-contato" data-screen="contato">
+        <!-- ===================== CONTATO ===================== -->
+        <section class="section" id="contato" aria-labelledby="tituloContato">
+          <div class="container">
         <header class="section-head">
           <h2 id="tituloContato">Contato</h2>
           <p class="section-sub">
@@ -454,8 +478,10 @@
             <p class="form-feedback" id="formFeedback" role="status" aria-live="polite" hidden></p>
           </form>
         </div>
-      </div>
-    </section>
+              </div>
+        </section>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">

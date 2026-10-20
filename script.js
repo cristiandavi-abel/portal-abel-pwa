@@ -391,8 +391,78 @@
     }
   }
 
+  function initAppScreens() {
+    const isStandalone = document.documentElement.classList.contains("app-standalone");
+    if (!isStandalone) return;
+
+    const bottomLinks = Array.from(document.querySelectorAll(".bottom-nav-link[href^='#']"));
+    const screens = Array.from(document.querySelectorAll(".app-screen"));
+    if (!bottomLinks.length || !screens.length) return;
+
+    const map = {
+      "#inicio": "inicio",
+      "#cursos": "cursos",
+      "#avisos": "avisos",
+      "#calendario": "calendario",
+      "#contato": "contato"
+    };
+
+    let current = document.querySelector(".app-screen.is-active")?.dataset.screen || "inicio";
+    let busy = false;
+
+    function showScreen(targetKey) {
+      if (busy || targetKey === current) return;
+      busy = true;
+
+      const active = document.querySelector(`.app-screen[data-screen="${current}"]`);
+      const next = document.querySelector(`.app-screen[data-screen="${targetKey}"]`);
+      if (!next) {
+        busy = false;
+        return;
+      }
+
+      if (active) {
+        active.classList.add("is-leaving");
+        active.classList.remove("is-active");
+        setTimeout(() => active.classList.remove("is-leaving"), 190);
+      }
+
+      next.scrollTop = 0;
+      next.classList.add("is-active");
+
+      bottomLinks.forEach((link) => {
+        const key = map[link.getAttribute("href")];
+        const isActive = key === targetKey;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+
+      current = targetKey;
+      history.replaceState(null, "", `#${targetKey}`);
+      setTimeout(() => {
+        busy = false;
+      }, 180);
+    }
+
+    bottomLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const key = map[link.getAttribute("href")];
+        if (key) showScreen(key);
+      });
+    });
+
+    const startKey = map[window.location.hash] || "inicio";
+    showScreen(startKey);
+  }
+
   function init() {
     initAppMode();
+    initAppScreens();
     initMenuMobile();
     initNavegacaoSecoes();
     initFiltroAvisos();
