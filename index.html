@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portal Escolar Abel - informações, cursos, avisos, calendário e contato da Escola Estadual Professor Abel Freire Coelho. Projeto demonstrativo (PWA)." />
+  <meta name="theme-color" content="#0d2b45" />
+  <title>Portal Escolar Abel | Escola Estadual Professor Abel Freire Coelho</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
+  <link rel="apple-touch-icon" href="icons/icon.svg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Portal Abel" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <header class="site-header" id="topo">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" aria-label="Portal Escolar Abel - ir para o início">
+        <img class="brand-logo" src="icons/icon.svg" alt="" width="44" height="44" aria-hidden="true" />
+        <span class="brand-text">
+          <strong>Portal Escolar Abel</strong>
+          <small>E. E. Professor Abel Freire Coelho</small>
+        </span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menuPrincipal"
+        aria-label="Abrir menu de navegação"
+      >
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="main-nav" id="menuPrincipal" aria-label="Navegação principal">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="#inicio">Início</a></li>
+          <li><a class="nav-link" href="#cursos">Cursos</a></li>
+          <li><a class="nav-link" href="#avisos">Avisos</a></li>
+          <li><a class="nav-link" href="#calendario">Calendário</a></li>
+          <li><a class="nav-link" href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  </header>
+
+  <main id="conteudo">
+    <!-- ===================== INÍCIO ===================== -->
+    <section class="hero" id="inicio" aria-labelledby="tituloInicio">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <p class="eyebrow">Portal institucional demonstrativo</p>
+          <h1 id="tituloInicio">Escola Estadual Professor Abel Freire Coelho</h1>
+          <p class="hero-lead">
+            Um espaço digital de apoio à comunidade escolar para reunir, de forma organizada e acessível,
+            informações sobre cursos, avisos da coordenação, calendário e canais de contato.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#avisos">Ver avisos</a>
+            <a class="btn btn-ghost" href="#cursos">Conhecer os cursos</a>
+          </div>
+          <ul class="hero-highlights" aria-label="Destaques do portal">
+            <li><span class="dot" aria-hidden="true"></span> Funciona offline após o primeiro acesso</li>
+            <li><span class="dot" aria-hidden="true"></span> Instalável no celular e no computador</li>
+            <li><span class="dot" aria-hidden="true"></span> Conteúdo demonstrativo e responsivo</li>
+          </ul>
+        </div>
+
+        <div class="hero-card" aria-hidden="true">
+          <div class="hero-card-top">
+            <span class="hero-badge">Portal Escolar</span>
+            <span class="hero-year" id="heroAno"></span>
+          </div>
+          <img class="hero-card-logo" src="icons/icon.svg" alt="" width="120" height="120" />
+          <p class="hero-card-quote">"Ensinar, aprender e crescer juntos."</p>
+          <div class="hero-card-stats">
+            <div><strong>3</strong><span>Cursos</span></div>
+            <div><strong>6+</strong><span>Avisos</span></div>
+            <div><strong>10</strong><span>Eventos</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SOBRE ===================== -->
+    <section class="section" id="sobre" aria-labelledby="tituloSobre">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="tituloSobre">Apresentação institucional</h2>
+          <p class="section-sub">
+            Este portal foi desenvolvido como atividade escolar, com o objetivo de praticar o desenvolvimento
+            de uma Aplicação Web Progressiva (PWA) utilizando apenas HTML, CSS e JavaScript.
+          </p>
+        </header>
+
+        <div class="cards-grid">
+          <article class="card info-card">
+            <span class="icon-badge" aria-hidden="true">🎯</span>
+            <h3>Missão</h3>
+            <p>
+              Promover uma educação pública de qualidade, incentivando o protagonismo dos estudantes,
+              o pensamento crítico e a convivência respeitosa na comunidade.
+            </p>
+          </article>
+          <article class="card info-card">
+            <span class="icon-badge" aria-hidden="true">🌱</span>
+            <h3>Valores</h3>
+            <p>
+              Respeito, responsabilidade, colaboração e valorização da diversidade são princípios que
+              orientam as ações pedagógicas e o convívio escolar.
+            </p>
+          </article>
+          <article class="card info-card">
+            <span class="icon-badge" aria-hidden="true">💡</span>
+            <h3>Projeto</h3>
+            <p>
+              O conteúdo apresentado é demonstrativo e tem finalidade educativa, servindo de modelo para
+              um portal oficial de comunicação da escola.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CURSOS ===================== -->
+    <section class="section section-alt" id="cursos" aria-labelledby="tituloCursos">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="tituloCursos">Cursos e informações escolares</h2>
+          <p class="section-sub">
+            Exemplos demonstrativos de modalidades de ensino. Os dados abaixo são ilustrativos e não
+            representam informações oficiais da escola.
+          </p>
+        </header>
+
+        <div class="cards-grid">
+          <article class="card course-card">
+            <div class="course-head">
+              <span class="tag tag-blue">Ensino Médio</span>
+              <h3>Ensino Médio Regular</h3>
+            </div>
+            <p>Formação geral com foco no desenvolvimento de competências para o estudo, o trabalho e a cidadania.</p>
+            <ul class="feature-list">
+              <li>Turnos: manhã e tarde <em>(exemplo)</em></li>
+              <li>Duração: 3 anos</li>
+              <li>Componentes da Base Nacional Comum</li>
+            </ul>
+          </article>
+
+          <article class="card course-card">
+            <div class="course-head">
+              <span class="tag tag-green">Técnico</span>
+              <h3>Curso Técnico Integrado</h3>
+            </div>
+            <p>Integração entre a formação geral e a educação profissional, aproximando o estudante do mundo do trabalho.</p>
+            <ul class="feature-list">
+              <li>Formação técnica integrada <em>(exemplo)</em></li>
+              <li>Projetos práticos e visitas técnicas</li>
+              <li>Certificação ao final do curso</li>
+            </ul>
+          </article>
+
+          <article class="card course-card">
+            <div class="course-head">
+              <span class="tag tag-blue">EJA</span>
+              <h3>Educação de Jovens e Adultos</h3>
+            </div>
+            <p>Modalidade destinada a jovens e adultos que desejam retomar ou concluir os estudos.</p>
+            <ul class="feature-list">
+              <li>Horários flexíveis <em>(exemplo)</em></li>
+              <li>Turmas por etapas</li>
+              <li>Acompanhamento pedagógico</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="table-wrap">
+          <table class="info-table">
+            <caption>Resumo demonstrativo das modalidades</caption>
+            <thead>
+              <tr>
+                <th scope="col">Modalidade</th>
+                <th scope="col">Duração</th>
+                <th scope="col">Turno (exemplo)</th>
+                <th scope="col">Certificação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Ensino Médio Regular</th>
+                <td>3 anos</td>
+                <td>Manhã / Tarde</td>
+                <td>Diploma de Ensino Médio</td>
+              </tr>
+              <tr>
+                <th scope="row">Curso Técnico Integrado</th>
+                <td>3 anos</td>
+                <td>Integral</td>
+                <td>Diploma + Habilitação Técnica</td>
+              </tr>
+              <tr>
+                <th scope="row">Educação de Jovens e Adultos</th>
+                <td>Por etapas</td>
+                <td>Noturno</td>
+                <td>Certificado de conclusão</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== AVISOS ===================== -->
+    <section class="section" id="avisos" aria-labelledby="tituloAvisos">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="tituloAvisos">Avisos e comunicados da coordenação</h2>
+          <p class="section-sub">
+            Comunicados fictícios criados apenas para demonstração das funcionalidades do portal.
+          </p>
+        </header>
+
+        <div class="filters" role="group" aria-label="Filtrar avisos por categoria">
+          <button class="filter-btn is-active" type="button" data-filter="todos" aria-pressed="true">Todos</button>
+          <button class="filter-btn" type="button" data-filter="academico" aria-pressed="false">Acadêmico</button>
+          <button class="filter-btn" type="button" data-filter="eventos" aria-pressed="false">Eventos</button>
+          <button class="filter-btn" type="button" data-filter="administrativo" aria-pressed="false">Administrativo</button>
+          <button class="filter-btn" type="button" data-filter="urgente" aria-pressed="false">Urgente</button>
+        </div>
+
+        <p class="results-info" id="resultadoFiltro" role="status" aria-live="polite">Mostrando todos os avisos.</p>
+
+        <div class="notices-grid" id="listaAvisos">
+          <article class="card notice-card" data-categoria="academico">
+            <div class="notice-head">
+              <span class="tag tag-blue">Acadêmico</span>
+              <time datetime="2026-03-10">10/03/2026</time>
+            </div>
+            <h3>Semana de revisão para as avaliações</h3>
+            <p>A coordenação informa que haverá plantão de dúvidas no contraturno durante toda a semana demonstrativa.</p>
+          </article>
+
+          <article class="card notice-card" data-categoria="eventos">
+            <div class="notice-head">
+              <span class="tag tag-green">Eventos</span>
+              <time datetime="2026-03-18">18/03/2026</time>
+            </div>
+            <h3>Feira de ciências e cultura</h3>
+            <p>Inscrições de projetos podem ser feitas com os professores orientadores até a data limite do exemplo.</p>
+          </article>
+
+          <article class="card notice-card" data-categoria="administrativo">
+            <div class="notice-head">
+              <span class="tag tag-blue">Administrativo</span>
+              <time datetime="2026-03-22">22/03/2026</time>
+            </div>
+            <h3>Atualização de dados cadastrais</h3>
+            <p>Responsáveis devem conferir e atualizar as informações de contato junto à secretaria (exemplo).</p>
+          </article>
+
+          <article class="card notice-card" data-categoria="urgente">
+            <div class="notice-head">
+              <span class="tag tag-red">Urgente</span>
+              <time datetime="2026-03-25">25/03/2026</time>
+            </div>
+            <h3>Alteração no horário de entrada</h3>
+            <p>Comunicado fictício sobre ajuste pontual de horário. Consulte a coordenação para confirmação oficial.</p>
+          </article>
+
+          <article class="card notice-card" data-categoria="academico">
+            <div class="notice-head">
+              <span class="tag tag-blue">Acadêmico</span>
+              <time datetime="2026-04-02">02/04/2026</time>
+            </div>
+            <h3>Entrega de trabalhos interdisciplinares</h3>
+            <p>Os grupos devem entregar os projetos no prazo combinado com cada professor, conforme o exemplo.</p>
+          </article>
+
+          <article class="card notice-card" data-categoria="eventos">
+            <div class="notice-head">
+              <span class="tag tag-green">Eventos</span>
+              <time datetime="2026-04-12">12/04/2026</time>
+            </div>
+            <h3>Gincana solidária estudantil</h3>
+            <p>Atividade demonstrativa com arrecadação de alimentos e participação das turmas em equipes.</p>
+          </article>
+        </div>
+
+        <p class="empty-state" id="avisoVazio" hidden>Nenhum aviso encontrado para esta categoria.</p>
+      </div>
+    </section>
+
+    <!-- ===================== CALENDÁRIO ===================== -->
+    <section class="section section-alt" id="calendario" aria-labelledby="tituloCalendario">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="tituloCalendario">Calendário escolar demonstrativo</h2>
+          <p class="section-sub">
+            Datas e eventos fictícios, usados apenas para ilustrar a seção de calendário do portal.
+          </p>
+        </header>
+
+        <div class="calendar-layout">
+          <div class="timeline" aria-label="Linha do tempo de eventos escolares">
+            <article class="timeline-item">
+              <time class="timeline-date" datetime="2026-02-02"><span>02</span>Fev</time>
+              <div class="timeline-body">
+                <h3>Início do ano letivo</h3>
+                <p>Recepção dos estudantes e apresentação das turmas e horários (exemplo).</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <time class="timeline-date" datetime="2026-03-10"><span>10</span>Mar</time>
+              <div class="timeline-body">
+                <h3>Semana de revisão</h3>
+                <p>Plantões de dúvidas e atividades de reforço antes das avaliações (exemplo).</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <time class="timeline-date" datetime="2026-04-12"><span>12</span>Abr</time>
+              <div class="timeline-body">
+                <h3>Gincana estudantil</h3>
+                <p>Atividades culturais e esportivas envolvendo todas as turmas (exemplo).</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <time class="timeline-date" datetime="2026-06-24"><span>24</span>Jun</time>
+              <div class="timeline-body">
+                <h3>Festa junina da escola</h3>
+                <p>Apresentações culturais e confraternização da comunidade escolar (exemplo).</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <time class="timeline-date" datetime="2026-09-07"><span>07</span>Set</time>
+              <div class="timeline-body">
+                <h3>Semana da pátria</h3>
+                <p>Atividades cívicas e projetos interdisciplinares sobre cidadania (exemplo).</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <time class="timeline-date" datetime="2026-12-15"><span>15</span>Dez</time>
+              <div class="timeline-body">
+                <h3>Encerramento do ano letivo</h3>
+                <p>Culminância dos projetos e entrega de resultados finais (exemplo).</p>
+              </div>
+            </article>
+          </div>
+
+          <aside class="calendar-side" aria-label="Informações complementares do calendário">
+            <div class="card side-card">
+              <h3>Meses com eventos</h3>
+              <ul class="chip-list">
+                <li class="chip">Fevereiro</li>
+                <li class="chip">Março</li>
+                <li class="chip">Abril</li>
+                <li class="chip">Junho</li>
+                <li class="chip">Setembro</li>
+                <li class="chip">Dezembro</li>
+              </ul>
+            </div>
+            <div class="card side-card side-card-note">
+              <h3>Observação</h3>
+              <p>
+                Este calendário é demonstrativo. Para o calendário oficial, consulte a secretaria e os
+                canais oficiais da escola.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTATO ===================== -->
+    <section class="section" id="contato" aria-labelledby="tituloContato">
+      <div class="container">
+        <header class="section-head">
+          <h2 id="tituloContato">Contato</h2>
+          <p class="section-sub">
+            Informações ilustrativas. Substitua pelos dados oficiais antes de qualquer uso real.
+          </p>
+        </header>
+
+        <div class="contact-layout">
+          <div class="cards-grid contact-cards">
+            <article class="card contact-card">
+              <span class="icon-badge" aria-hidden="true">📍</span>
+              <h3>Endereço</h3>
+              <p>Endereço ilustrativo — informe aqui o endereço oficial da escola.</p>
+            </article>
+            <article class="card contact-card">
+              <span class="icon-badge" aria-hidden="true">📞</span>
+              <h3>Telefone</h3>
+              <p>(00) 0000-0000 — dado demonstrativo, sem informação real.</p>
+            </article>
+            <article class="card contact-card">
+              <span class="icon-badge" aria-hidden="true">✉️</span>
+              <h3>E-mail</h3>
+              <p>contato@exemplo.edu.br — endereço fictício para fins de exemplo.</p>
+            </article>
+            <article class="card contact-card">
+              <span class="icon-badge" aria-hidden="true">🕘</span>
+              <h3>Atendimento</h3>
+              <p>Segunda a sexta, em horário comercial (exemplo).</p>
+            </article>
+          </div>
+
+          <form class="card contact-form" id="formContato" novalidate>
+            <h3>Formulário demonstrativo</h3>
+            <p class="form-note">Este formulário não envia dados a nenhum servidor. É apenas uma demonstração.</p>
+
+            <div class="field">
+              <label for="nome">Nome</label>
+              <input id="nome" name="nome" type="text" autocomplete="name" placeholder="Digite seu nome" required />
+              <span class="field-error" data-error-for="nome" aria-live="polite"></span>
+            </div>
+
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required />
+              <span class="field-error" data-error-for="email" aria-live="polite"></span>
+            </div>
+
+            <div class="field">
+              <label for="assunto">Assunto</label>
+              <select id="assunto" name="assunto">
+                <option value="duvidas">Dúvidas gerais</option>
+                <option value="matricula">Matrícula</option>
+                <option value="avisos">Avisos</option>
+                <option value="outros">Outros</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="mensagem">Mensagem</label>
+              <textarea id="mensagem" name="mensagem" rows="4" placeholder="Escreva sua mensagem" required></textarea>
+              <span class="field-error" data-error-for="mensagem" aria-live="polite"></span>
+            </div>
+
+            <button class="btn btn-primary btn-block" type="submit">Enviar mensagem</button>
+
+            <p class="form-feedback" id="formFeedback" role="status" aria-live="polite" hidden></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="icons/icon.svg" alt="" width="36" height="36" aria-hidden="true" />
+        <div>
+          <strong>Portal Escolar Abel</strong>
+          <p>Escola Estadual Professor Abel Freire Coelho</p>
+        </div>
+      </div>
+
+      <nav aria-label="Links do rodapé">
+        <ul class="footer-links">
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#cursos">Cursos</a></li>
+          <li><a href="#avisos">Avisos</a></li>
+          <li><a href="#calendario">Calendário</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <p class="footer-note">
+        Projeto escolar demonstrativo desenvolvido com HTML, CSS e JavaScript puro (PWA).
+        Conteúdo fictício, sem dados pessoais reais.
+      </p>
+      <p class="footer-copy">&copy; <span id="anoAtual"></span> Portal Escolar Abel — projeto educativo.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Voltar ao topo" hidden>↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

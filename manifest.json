@@ -1,0 +1,28 @@
+{
+  "name": "Portal Escolar Abel - Escola Estadual Professor Abel Freire Coelho",
+  "short_name": "Portal Abel",
+  "description": "Portal escolar demonstrativo com informações sobre cursos, avisos, calendário e contato. Projeto educativo desenvolvido com HTML, CSS e JavaScript puro.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5f9fd",
+  "theme_color": "#0d2b45",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "192x192 256x256 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
